@@ -2,6 +2,7 @@ package com.ipn.modelo.Beans;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -26,7 +27,7 @@ public class CentroDeTrabajo implements Serializable{
         private String nombreCentroTrabajo;
         // Lo siguiente es para crear la relacion con la tabla Carrera
         @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCarrera")
-        private Collection<Carrera> Carreras;
+        private List<Carrera> Carreras;
 
     @Override
     public String toString() {
@@ -64,14 +65,14 @@ public class CentroDeTrabajo implements Serializable{
     /**
      * @return the Carreras
      */
-    public Collection<Carrera> getCarreras() {
+    public List<Carrera> getCarreras() {
         return Carreras;
     }
 
     /**
      * @param Carreras the Carreras to set
      */
-    public void setCarreras(Collection<Carrera> Carreras) {
+    public void setCarreras(List<Carrera> Carreras) {
         this.Carreras = Carreras;
     }
     

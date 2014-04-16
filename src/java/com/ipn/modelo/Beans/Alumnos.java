@@ -1,7 +1,7 @@
 package com.ipn.modelo.Beans;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -42,7 +42,7 @@ public class Alumnos implements Serializable {
         @JoinTable(name = "USER_GROUP", 
            joinColumns = { @JoinColumn(name = "userid") }, 
            inverseJoinColumns = { @JoinColumn(name = "groupid") })
-        private Collection<Materia> materias;
+        private List<Materia> materias;
 
     /**
      * @return the idAlumnos
@@ -159,15 +159,14 @@ public class Alumnos implements Serializable {
     /**
      * @return the materias
      */
-    @ManyToMany
-    public Collection<Materia> getMaterias() {
+    public List<Materia> getMaterias() {
         return materias;
     }
 
     /**
      * @param materias the materias to set
      */
-    public void setMaterias(Collection<Materia> materias) {
+    public void setMaterias(List<Materia> materias) {
         this.materias = materias;
     }
         
