@@ -6,6 +6,10 @@
 
 package com.ipn.modelo.Beans;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 /**
  *
  * @author eric
@@ -14,6 +18,8 @@ import javax.persistence.Entity;
 @Entity
 @Table(name="Evaluacion")
 public class Evaluacion {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idEvaluacion;
     private String Evaluacioncol;
 
