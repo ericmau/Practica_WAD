@@ -6,13 +6,24 @@
 
 package com.ipn.modelo.Beans;
 
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
 /**
  *
  * @author eric
  */
-public class Respuestas {
+@Entity
+@Table(name="Respuestas")
+public class Respuestas implements Serializable{
     private int idRespuestas;
     private String Respuestas;
+    
+    // Relacion con la tabla Preguntas ""OneToOne
+     @OneToOne(optional=false, mappedBy="respuesta")
+     private Preguntas pregunta;
 
     public Respuestas() {
     }

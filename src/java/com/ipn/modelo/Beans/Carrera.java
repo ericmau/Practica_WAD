@@ -2,12 +2,15 @@
 package com.ipn.modelo.Beans;
 
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  * @author Diego
@@ -27,10 +30,14 @@ public class Carrera implements Serializable{
         nullable = false)
         @ManyToOne(optional = false)
         private  CentroDeTrabajo CentroDeTrabajo_idCentroDeTrabajo;
+        
+         // Lo siguiente es para crear la relacion con la tabla Alumno
+        @OneToMany(cascade = CascadeType.ALL, mappedBy = "idAlumnos")
+        private List<Alumnos> alumnos;
 
     @Override
     public String toString() {
-        return "Carrera{" + "idCarrera=" + idCarrera + ", nombreCarrera=" + nombreCarrera + ", duracion=" + duracion + '}';
+        return "Carrera{" + "idCarrera=" + getIdCarrera() + ", nombreCarrera=" + getNombreCarrera() + ", duracion=" + getDuracion() + '}';
     }
 
     /**
@@ -87,5 +94,19 @@ public class Carrera implements Serializable{
      */
     public void setCentroDeTrabajo_idCentroDeTrabajo(CentroDeTrabajo CentroDeTrabajo_idCentroDeTrabajo) {
         this.CentroDeTrabajo_idCentroDeTrabajo = CentroDeTrabajo_idCentroDeTrabajo;
+    }
+
+    /**
+     * @return the alumnos
+     */
+    public List<Alumnos> getAlumnos() {
+        return alumnos;
+    }
+
+    /**
+     * @param alumnos the alumnos to set
+     */
+    public void setAlumnos(List<Alumnos> alumnos) {
+        this.alumnos = alumnos;
     }
 }

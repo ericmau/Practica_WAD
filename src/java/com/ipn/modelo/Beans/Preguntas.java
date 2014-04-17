@@ -6,13 +6,41 @@
 
 package com.ipn.modelo.Beans;
 
+import static com.oracle.jrockit.jfr.ContentType.Address;
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
 /**
  *
  * @author eric
  */
-public class Preguntas {
+
+@Entity
+@Table(name="Preguntas")
+public class Preguntas implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idPreguntas;
     private String Pregunta;
+    
+     // Lo siguiente es para relacion con la tabla Evaluacion, es de "muchos a uno"
+        @JoinColumn(name = "Evaluacion_idEvaluacion",referencedColumnName = "idEvaluacion",
+        nullable = false)
+        @ManyToOne(optional = false)
+        private Evaluacion Evaluacion_idEvaluacion;
+        
+    // Lo siguiente es para la relacion con "OneToOne" con respuesta
+        @OneToOne(fetch=FetchType.LAZY,optional=false)
+        @JoinColumn(name="Respuestas_idRespuestas")
+        private Respuestas respuesta;
 
     public Preguntas() {
     }
