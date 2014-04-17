@@ -8,6 +8,9 @@ package com.ipn.modelo.Beans;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -18,8 +21,10 @@ import javax.persistence.Table;
 @Entity
 @Table(name="Respuestas")
 public class Respuestas implements Serializable{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idRespuestas;
-    private String Respuestas;
+    private Character Respuesta;
     
     // Relacion con la tabla Preguntas ""OneToOne
      @OneToOne(optional=false, mappedBy="respuesta")
@@ -36,17 +41,45 @@ public class Respuestas implements Serializable{
         this.idRespuestas = idRespuestas;
     }
 
-    public String getRespuestas() {
-        return Respuestas;
+    public Character getRespuestas() {
+        return Respuesta;
     }
 
-    public void setRespuestas(String Respuestas) {
-        this.Respuestas = Respuestas;
+    public void setRespuestas(Character Respuestas) {
+        this.Respuesta = Respuestas;
     }
 
     @Override
     public String toString() {
-        return "Respuestas{" + "idRespuestas=" + idRespuestas + ", Respuestas=" + Respuestas + '}';
+        return "Respuestas{" + "idRespuestas=" + getIdRespuestas() + ", Respuestas=" + Respuestas + '}';
+    }
+
+    /**
+     * @return the Respuesta
+     */
+    public Character getRespuesta() {
+        return Respuesta;
+    }
+
+    /**
+     * @param Respuesta the Respuesta to set
+     */
+    public void setRespuesta(Character Respuesta) {
+        this.Respuesta = Respuesta;
+    }
+
+    /**
+     * @return the pregunta
+     */
+    public Preguntas getPregunta() {
+        return pregunta;
+    }
+
+    /**
+     * @param pregunta the pregunta to set
+     */
+    public void setPregunta(Preguntas pregunta) {
+        this.pregunta = pregunta;
     }
     
     
