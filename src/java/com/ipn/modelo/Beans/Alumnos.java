@@ -37,11 +37,16 @@ public class Alumnos implements Serializable {
         @ManyToOne(optional = false)
         private  Carrera Carrera_isCarrera;
         
-        // Lo siguiente es para crear la relacion con la tabla Carrera
+        // Lo siguiente es para crear la relacion con la tabla Materia
+        @JoinTable(name = "Alumnos_has_Materia", 
+        joinColumns = { 
+               @JoinColumn(name = "Alumnos_idAlumnos", referencedColumnName = "idAlumnos")
+        }, 
+        inverseJoinColumns = { 
+               @JoinColumn(name = "Materia_idMateria", referencedColumnName = "idMateria")
+        }
+        )
         @ManyToMany(fetch = FetchType.LAZY)
-        @JoinTable(name = "USER_GROUP", 
-           joinColumns = { @JoinColumn(name = "userid") }, 
-           inverseJoinColumns = { @JoinColumn(name = "groupid") })
         private List<Materia> materias;
 
     /**
