@@ -7,8 +7,6 @@
     <class>com.ipn.modelo.Beans.CentroDeTrabajo</class>
     <class>com.ipn.modelo.Beans.Evaluacion</class>
     <class>com.ipn.modelo.Beans.Materia</class>
-    <class>com.ipn.modelo.Beans.Preguntas</class>
-    <class>com.ipn.modelo.Beans.Respuestas</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/wad_p02?zeroDateTimeBehavior=convertToNull"/>

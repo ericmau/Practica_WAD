@@ -22,7 +22,7 @@ public class CentroDeTrabajo implements Serializable{
     // Atributos de la tabla Centro de trabajo
         @Id
         @GeneratedValue(strategy=GenerationType.IDENTITY)
-        @Basic(optional = false)
+        //@Basic(optional = false)
         private int idCentroDeTrabajo;
         private String nombreCentroTrabajo;
         // Lo siguiente es para crear la relacion con la tabla Carrera
