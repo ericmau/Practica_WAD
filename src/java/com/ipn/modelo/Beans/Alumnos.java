@@ -2,6 +2,7 @@ package com.ipn.modelo.Beans;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -11,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  *
@@ -19,6 +21,7 @@ import javax.persistence.ManyToOne;
 
 // Bean para los alumnos
 @Entity
+@Table(name="Alumnos")
 public class Alumnos implements Serializable {
     // Atributos de la tabla Carrera
         @Id
@@ -28,16 +31,19 @@ public class Alumnos implements Serializable {
         private String Paterno;
         private String Materno;
         private String email;
+        @Basic(optional = true)
         private byte[] foto;
+        @Basic(optional = true)
         private String tipoFoto;
         
         // Lo siguiente es para relacion con la tabla Carrera, es de "muchos a uno"
+        @ManyToOne(optional = false, fetch=FetchType.LAZY)
         @JoinColumn(name = "Carrera_idCarrera",referencedColumnName = "idCarrera",
         nullable = false)
-        @ManyToOne(optional = false)
-        private  Carrera Carrera_isCarrera;
+        private  Carrera Carrera;
         
         // Lo siguiente es para crear la relacion con la tabla Materia
+        @ManyToMany(fetch = FetchType.LAZY)
         @JoinTable(name = "Alumnos_has_Materia", 
         joinColumns = { 
                @JoinColumn(name = "Alumnos_idAlumnos", referencedColumnName = "idAlumnos")
@@ -46,7 +52,6 @@ public class Alumnos implements Serializable {
                @JoinColumn(name = "Materia_idMateria", referencedColumnName = "idMateria")
         }
         )
-        @ManyToMany(fetch = FetchType.LAZY)
         private List<Materia> materias;
 
     /**
@@ -148,17 +153,17 @@ public class Alumnos implements Serializable {
     }
 
     /**
-     * @return the Carrera_isCarrera
+     * @return the Carrera
      */
-    public Carrera getCarrera_isCarrera() {
-        return Carrera_isCarrera;
+    public Carrera getCarrera() {
+        return Carrera;
     }
 
     /**
-     * @param Carrera_isCarrera the Carrera_isCarrera to set
+     * @param Carrera the Carrera to set
      */
-    public void setCarrera_isCarrera(Carrera Carrera_isCarrera) {
-        this.Carrera_isCarrera = Carrera_isCarrera;
+    public void setCarrera(Carrera Carrera) {
+        this.Carrera = Carrera;
     }
 
     /**
@@ -174,6 +179,11 @@ public class Alumnos implements Serializable {
     public void setMaterias(List<Materia> materias) {
         this.materias = materias;
     }
-        
+
+    @Override
+    public String toString() {
+        return "Alumnos{" + "idAlumnos=" + idAlumnos + ", Nombre=" + Nombre + ", Paterno=" + Paterno + ", Materno=" + Materno + ", email=" + email + '}';
+    }
+
     
 }

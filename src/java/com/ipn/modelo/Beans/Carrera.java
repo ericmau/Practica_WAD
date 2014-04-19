@@ -5,12 +5,14 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  * @author Diego
@@ -18,6 +20,7 @@ import javax.persistence.OneToMany;
 
 // Bean de la tabla Carrera
 @Entity
+@Table(name="Carrera")
 public class Carrera implements Serializable{
     // Atributos de la tabla Carrera
         @Id
@@ -26,19 +29,14 @@ public class Carrera implements Serializable{
         private String nombreCarrera;
         private int duracion;
         // Lo siguiente es para relacion con la tabla Centro de trabajo, es de "muchos a uno"
+        @ManyToOne(optional = false, fetch=FetchType.LAZY)
         @JoinColumn(name = "CentroDeTrabajo_idCentroDeTrabajo",referencedColumnName = "idCentroDeTrabajo",
         nullable = false)
-        @ManyToOne(optional = false)
-        private  CentroDeTrabajo CentroDeTrabajo_idCentroDeTrabajo;
+        private  CentroDeTrabajo CDT;
         
          // Lo siguiente es para crear la relacion con la tabla Alumno
-        @OneToMany(cascade = CascadeType.ALL, mappedBy = "idAlumnos")
+        @OneToMany(cascade = CascadeType.ALL, mappedBy = "Carrera")
         private List<Alumnos> alumnos;
-
-    @Override
-    public String toString() {
-        return "Carrera{" + "idCarrera=" + getIdCarrera() + ", nombreCarrera=" + getNombreCarrera() + ", duracion=" + getDuracion() + '}';
-    }
 
     /**
      * @return the idCarrera
@@ -83,17 +81,17 @@ public class Carrera implements Serializable{
     }
 
     /**
-     * @return the CentroDeTrabajo_idCentroDeTrabajo
+     * @return the CDT
      */
-    public CentroDeTrabajo getCentroDeTrabajo_idCentroDeTrabajo() {
-        return CentroDeTrabajo_idCentroDeTrabajo;
+    public CentroDeTrabajo getCDT() {
+        return CDT;
     }
 
     /**
-     * @param CentroDeTrabajo_idCentroDeTrabajo the CentroDeTrabajo_idCentroDeTrabajo to set
+     * @param CDT the CDT to set
      */
-    public void setCentroDeTrabajo_idCentroDeTrabajo(CentroDeTrabajo CentroDeTrabajo_idCentroDeTrabajo) {
-        this.CentroDeTrabajo_idCentroDeTrabajo = CentroDeTrabajo_idCentroDeTrabajo;
+    public void setCDT(CentroDeTrabajo CDT) {
+        this.CDT = CDT;
     }
 
     /**
@@ -109,4 +107,11 @@ public class Carrera implements Serializable{
     public void setAlumnos(List<Alumnos> alumnos) {
         this.alumnos = alumnos;
     }
+
+    @Override
+    public String toString() {
+        return "Carrera{" + "idCarrera=" + idCarrera + ", nombreCarrera=" + nombreCarrera + ", duracion=" + duracion + '}';
+    }
+
+   
 }

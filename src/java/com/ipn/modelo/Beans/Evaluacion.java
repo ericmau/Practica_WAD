@@ -2,6 +2,7 @@
 package com.ipn.modelo.Beans;
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,37 +23,18 @@ public class Evaluacion implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idEvaluacion;
+    @Basic(optional = true)
     private String Evaluacioncol;
     
     // Lo siguiente es para relacion con la tabla Materia, es de "muchos a uno"
+        @ManyToOne(optional = false)
         @JoinColumn(name = "Materia_idMateria",referencedColumnName = "idMateria",
         nullable = false)
-        @ManyToOne(optional = false)
-        private  Materia Materia_idMateria;
+        private  Materia M;
         
          // Lo siguiente es para crear la relacion con la tabla Evaluacion
-        @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPreguntas")
+        @OneToMany(cascade = CascadeType.ALL, mappedBy = "evaluacion")
         private List<Preguntas> preguntas;
-    
-
-    public Evaluacion() {
-    }
-
-    public int getIdEvaluacion() {
-        return idEvaluacion;
-    }
-
-    public void setIdEvaluacion(int idEvaluacion) {
-        this.idEvaluacion = idEvaluacion;
-    }
-
-    public String getEvaluacioncol() {
-        return Evaluacioncol;
-    }
-
-    public void setEvaluacioncol(String Evaluacioncol) {
-        this.Evaluacioncol = Evaluacioncol;
-    }
 
     @Override
     public String toString() {
@@ -60,17 +42,45 @@ public class Evaluacion implements Serializable {
     }
 
     /**
-     * @return the Materia_idMateria
+     * @return the idEvaluacion
      */
-    public Materia getMateria_idMateria() {
-        return Materia_idMateria;
+    public int getIdEvaluacion() {
+        return idEvaluacion;
     }
 
     /**
-     * @param Materia_idMateria the Materia_idMateria to set
+     * @param idEvaluacion the idEvaluacion to set
      */
-    public void setMateria_idMateria(Materia Materia_idMateria) {
-        this.Materia_idMateria = Materia_idMateria;
+    public void setIdEvaluacion(int idEvaluacion) {
+        this.idEvaluacion = idEvaluacion;
+    }
+
+    /**
+     * @return the Evaluacioncol
+     */
+    public String getEvaluacioncol() {
+        return Evaluacioncol;
+    }
+
+    /**
+     * @param Evaluacioncol the Evaluacioncol to set
+     */
+    public void setEvaluacioncol(String Evaluacioncol) {
+        this.Evaluacioncol = Evaluacioncol;
+    }
+
+    /**
+     * @return the M
+     */
+    public Materia getM() {
+        return M;
+    }
+
+    /**
+     * @param M the M to set
+     */
+    public void setM(Materia M) {
+        this.M = M;
     }
 
     /**
@@ -87,6 +97,5 @@ public class Evaluacion implements Serializable {
         this.preguntas = preguntas;
     }
     
-    
-    
+        
 }

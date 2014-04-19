@@ -32,39 +32,76 @@ public class Preguntas implements Serializable {
     private String Pregunta;
     
      // Lo siguiente es para relacion con la tabla Evaluacion, es de "muchos a uno"
+        @ManyToOne(optional = false)
         @JoinColumn(name = "Evaluacion_idEvaluacion",referencedColumnName = "idEvaluacion",
         nullable = false)
-        @ManyToOne(optional = false)
-        private Evaluacion Evaluacion_idEvaluacion;
+        private Evaluacion evaluacion;
         
-    // Lo siguiente es para la relacion con "OneToOne" con respuesta
+    // Lo siguiente es para la relacion con "OneToOne" con la tabla Respuesta
         @OneToOne(fetch=FetchType.LAZY,optional=false)
-        @JoinColumn(name="Respuestas_idRespuestas")
+        @JoinColumn(name="Respuestas_idRespuestas",referencedColumnName = "idRespuestas")
         private Respuestas respuesta;
 
-    public Preguntas() {
+    @Override
+    public String toString() {
+        return "Preguntas{" + "idPreguntas=" + getIdPreguntas() + ", Pregunta=" + getPregunta() + '}';
     }
 
+    /**
+     * @return the idPreguntas
+     */
     public int getIdPreguntas() {
         return idPreguntas;
     }
 
+    /**
+     * @param idPreguntas the idPreguntas to set
+     */
     public void setIdPreguntas(int idPreguntas) {
         this.idPreguntas = idPreguntas;
     }
 
+    /**
+     * @return the Pregunta
+     */
     public String getPregunta() {
         return Pregunta;
     }
 
+    /**
+     * @param Pregunta the Pregunta to set
+     */
     public void setPregunta(String Pregunta) {
         this.Pregunta = Pregunta;
     }
 
-    @Override
-    public String toString() {
-        return "Preguntas{" + "idPreguntas=" + idPreguntas + ", Pregunta=" + Pregunta + '}';
+    /**
+     * @return the evaluacion
+     */
+    public Evaluacion getEvaluacion() {
+        return evaluacion;
     }
-    
-    
+
+    /**
+     * @param evaluacion the evaluacion to set
+     */
+    public void setEvaluacion(Evaluacion evaluacion) {
+        this.evaluacion = evaluacion;
+    }
+
+    /**
+     * @return the respuesta
+     */
+    public Respuestas getRespuesta() {
+        return respuesta;
+    }
+
+    /**
+     * @param respuesta the respuesta to set
+     */
+    public void setRespuesta(Respuestas respuesta) {
+        this.respuesta = respuesta;
+    }
+
+   
 }

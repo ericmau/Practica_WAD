@@ -30,28 +30,23 @@ public class Respuestas implements Serializable{
      @OneToOne(optional=false, mappedBy="respuesta")
      private Preguntas pregunta;
 
-    public Respuestas() {
+    @Override
+    public String toString() {
+        return "Respuestas{" + "idRespuestas=" + getIdRespuestas() + ", Respuesta=" + getRespuesta() + '}';
     }
 
+    /**
+     * @return the idRespuestas
+     */
     public int getIdRespuestas() {
         return idRespuestas;
     }
 
+    /**
+     * @param idRespuestas the idRespuestas to set
+     */
     public void setIdRespuestas(int idRespuestas) {
         this.idRespuestas = idRespuestas;
-    }
-
-    public Character getRespuestas() {
-        return Respuesta;
-    }
-
-    public void setRespuestas(Character Respuestas) {
-        this.Respuesta = Respuestas;
-    }
-
-    @Override
-    public String toString() {
-        return "Respuestas{" + "idRespuestas=" + getIdRespuestas() + ", Respuestas=" + Respuestas + '}';
     }
 
     /**
@@ -81,6 +76,7 @@ public class Respuestas implements Serializable{
     public void setPregunta(Preguntas pregunta) {
         this.pregunta = pregunta;
     }
+
     
     
 }

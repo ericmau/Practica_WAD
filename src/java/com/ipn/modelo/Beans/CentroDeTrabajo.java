@@ -1,7 +1,6 @@
 package com.ipn.modelo.Beans;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -10,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
@@ -18,15 +18,17 @@ import javax.persistence.OneToMany;
 
 // Bean para el centro de trabajo
 @Entity
+@Table(name="CentroDeTrabajo")
 public class CentroDeTrabajo implements Serializable{
     // Atributos de la tabla Centro de trabajo
         @Id
         @GeneratedValue(strategy=GenerationType.IDENTITY)
-        //@Basic(optional = false)
+        @Basic(optional = false)
         private int idCentroDeTrabajo;
+        @Basic(optional = true)
         private String nombreCentroTrabajo;
         // Lo siguiente es para crear la relacion con la tabla Carrera
-        @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCarrera")
+        @OneToMany(cascade = CascadeType.ALL, mappedBy = "CDT")
         private List<Carrera> Carreras;
 
     @Override
