@@ -1,5 +1,6 @@
 package com.ipn.controlador;
 
+import com.ipn.modelo.Beans.Carrera;
 import com.ipn.modelo.Beans.CentroDeTrabajo;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -23,13 +24,14 @@ public class MainP01 {
         EntityManager em = factory.createEntityManager();
         System.out.println("PASO");
         // Preparar entidad
-        CentroDeTrabajo ct = new CentroDeTrabajo();
-        ct.setNombreCentroTrabajo("IPN");
-        ct.setCarreras(null);
+        Carrera c = new Carrera();
+        c.setNombreCarrera("ESCOM");
+        c.setDuracion(5);
+        c.setCDT(null);
         // Empezar transaccion
         em.getTransaction().begin();
         // Guardar entidad
-        em.persist(ct);
+        em.persist(c);
         // Hacer un commit
         em.getTransaction().commit();
         // Cerrar coneccion

@@ -28,12 +28,13 @@ public class CentroDeTrabajo implements Serializable{
         @Basic(optional = true)
         private String nombreCentroTrabajo;
         // Lo siguiente es para crear la relacion con la tabla Carrera
+        /*@Basic(optional = true)
         @OneToMany(cascade = CascadeType.ALL, mappedBy = "CDT")
-        private List<Carrera> Carreras;
+        private List<Carrera> Carreras;*/
 
     @Override
     public String toString() {
-        return "CentroDeTrabajo{" + "idCentroDeTrabajo=" + idCentroDeTrabajo + ", nombreCentroTrabajo=" + nombreCentroTrabajo + '}';
+        return "CentroDeTrabajo{" + "idCentroDeTrabajo=" + getIdCentroDeTrabajo() + ", nombreCentroTrabajo=" + getNombreCentroTrabajo() + '}';
     }
 
     /**
@@ -63,19 +64,4 @@ public class CentroDeTrabajo implements Serializable{
     public void setNombreCentroTrabajo(String nombreCentroTrabajo) {
         this.nombreCentroTrabajo = nombreCentroTrabajo;
     }
-
-    /**
-     * @return the Carreras
-     */
-    public List<Carrera> getCarreras() {
-        return Carreras;
-    }
-
-    /**
-     * @param Carreras the Carreras to set
-     */
-    public void setCarreras(List<Carrera> Carreras) {
-        this.Carreras = Carreras;
-    }
-    
 }
