@@ -4,6 +4,7 @@
     Author     : Diego
 --%>
 
+<%@page import="com.ipn.Session.ManejadorSesiones"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -19,6 +20,13 @@
 
     <!-- SB Admin CSS - Include with every page -->
     <link href="css/sb-admin.css" rel="stylesheet">
+    <%
+        ManejadorSesiones sesion = new ManejadorSesiones();
+        if(sesion.isSession(request)==true)
+        {
+            sesion.removeSession(request, response);
+        }
+    %>
 
 </head>
 
