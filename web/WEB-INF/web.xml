@@ -8,9 +8,17 @@
         <servlet-name>ManejadorSesion</servlet-name>
         <servlet-class>com.ipn.controlador.ServletWAD</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServletWAD</servlet-name>
+        <servlet-class>com.ipn.controlador.ServletWAD</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ManejadorSesion</servlet-name>
         <url-pattern>/ManejadorSesion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletWAD</servlet-name>
+        <url-pattern>/ServletWAD</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

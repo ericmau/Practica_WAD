@@ -1,7 +1,7 @@
 package com.ipn.controlador;
 
+import com.ipn.Session.ManejadorSesiones;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.servlet.ServletException;
@@ -27,11 +27,21 @@ public class ServletWAD extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        ManejadorSesiones sesion = new ManejadorSesiones();
         EntityManagerFactory emf=(EntityManagerFactory)getServletContext().getAttribute("emf");
         EntityManager em = emf.createEntityManager();
         String accion=request.getParameter("accion");
         // Aqui va toda la logica del negocio, usaremos el atributo "accion" para ver que se tiene que hacer
         switch (accion) {
+            case "Ingresar":
+                if(request.getParameter("password").equals("1234"))
+                {
+                    sesion.createSession(request, response, request.getParameter("nombre"));
+                    muestraIndex(request,response);
+                }
+                else
+                {muestraError(request,response);}
+                break;
             case "materias":
                 muestraMaterias(request,response);
                 break;
@@ -101,6 +111,10 @@ public class ServletWAD extends HttpServlet {
 
     private void muestraError(HttpServletRequest request, HttpServletResponse response) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void muestraIndex(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("/index.jsp").forward(request, response);
     }
 
 }
