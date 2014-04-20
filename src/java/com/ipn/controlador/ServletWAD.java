@@ -52,6 +52,16 @@ public class ServletWAD extends HttpServlet {
                     muestraIndex(request,response);
                 }
                 break;
+            case "inicio":
+                if(sesion.isSession(request))
+                {
+                    muestraIndex(request, response);
+                }
+                else
+                {
+                    muestraError(request, response);
+                }
+                break;
             case "materias":
                 muestraMaterias(request,response);
                 break;
