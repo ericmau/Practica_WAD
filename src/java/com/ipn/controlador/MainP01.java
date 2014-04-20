@@ -36,8 +36,9 @@ public class MainP01 {
         //m.createMateria();
         //Crear Alumno
         //m.createAlumno(); 
+        m.findAlumno();
         //Crear Evaluacion
-        m.createEvaluacion();
+        //m.createEvaluacion();
         
     }
 
@@ -123,10 +124,6 @@ public class MainP01 {
         // Preparar entidad
         CentroDeTrabajo ct = new CentroDeTrabajo();
         ct.setNombreCentroTrabajo("IPN");
-        Carrera c=em.find(Carrera.class, 1);
-        List<Carrera> l = new ArrayList<>();
-        l.add(c);
-        ct.setCarreras(l);
         // Guardar entidad
         em.persist(ct);
         // Hacer un commit
@@ -153,6 +150,25 @@ public class MainP01 {
         e.setPreguntas(null);
         // Guardar entidad
         em.persist(e);
+        // Hacer un commit
+        em.getTransaction().commit();
+        // Cerrar coneccion
+        }finally{
+            if(em.getTransaction().isActive())
+            {   em.getTransaction().rollback();}
+            em.close();
+            factory.close();
+        }
+    }
+
+    private void findAlumno() {
+        try{
+        System.out.println("ENCUENTRA ALUMNO");
+        // Empezar transaccion
+        em.getTransaction().begin();
+        // Preparar entidad
+        Alumnos a=em.find(Alumnos.class, 1);
+            System.out.println(a.getNombre()+" "+a.getPaterno());
         // Hacer un commit
         em.getTransaction().commit();
         // Cerrar coneccion

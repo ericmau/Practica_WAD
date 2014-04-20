@@ -1,6 +1,7 @@
 package com.ipn.controlador;
 
 import com.ipn.Session.ManejadorSesiones;
+import com.ipn.modelo.Beans.Alumnos;
 import java.io.IOException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Diego
  */
 public class ServletWAD extends HttpServlet {
+    private Alumnos a=null;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,13 +36,21 @@ public class ServletWAD extends HttpServlet {
         // Aqui va toda la logica del negocio, usaremos el atributo "accion" para ver que se tiene que hacer
         switch (accion) {
             case "Ingresar":
-                if(request.getParameter("password").equals("1234"))
+                if((a=em.find(Alumnos.class,Integer.parseInt(request.getParameter("password"))))==null)
+                {muestraError(request,response);}
+                else
                 {
-                    sesion.createSession(request, response, request.getParameter("nombre"));
+                    if(sesion.isSession(request)==false)
+                    {
+                        sesion.createSession(request, response, a);
+                    }
+                    else
+                    {
+                        sesion.removeSession(request, response);
+                        sesion.createSession(request, response, a);
+                    }
                     muestraIndex(request,response);
                 }
-                else
-                {muestraError(request,response);}
                 break;
             case "materias":
                 muestraMaterias(request,response);
@@ -97,8 +107,8 @@ public class ServletWAD extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private void muestraMaterias(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private void muestraMaterias(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        request.getRequestDispatcher("/listaMaterias.jsp").forward(request, response);
     }
 
     private void muestraPreguntas(HttpServletRequest request, HttpServletResponse response) {
