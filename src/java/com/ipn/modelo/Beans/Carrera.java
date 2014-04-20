@@ -2,6 +2,8 @@
 package com.ipn.modelo.Beans;
 
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -9,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -32,13 +35,12 @@ public class Carrera implements Serializable{
         private  CentroDeTrabajo CDT;
         
          // Lo siguiente es para crear la relacion con la tabla Alumno
-        /*@OneToMany(cascade = CascadeType.ALL, mappedBy = "Carrera")
-        private List<Alumnos> alumnos;*/
-
+        @OneToMany(cascade = CascadeType.ALL, mappedBy = "Carrera")
+        private List<Alumnos> alumnos;
 
     @Override
     public String toString() {
-        return "Carrera{" + "idCarrera=" + getIdCarrera() + ", nombreCarrera=" + getNombreCarrera() + ", duracion=" + getDuracion() + '}';
+        return "Carrera{" + "idCarrera=" + getIdCarrera() + ", nombreCarrera=" + getNombreCarrera() + ", duracion=" + getDuracion() + ", CDT=" + getCDT() + ", alumnos=" + getAlumnos() + '}';
     }
 
     /**
@@ -97,5 +99,20 @@ public class Carrera implements Serializable{
         this.CDT = CDT;
     }
 
-   
+    /**
+     * @return the alumnos
+     */
+    public List<Alumnos> getAlumnos() {
+        return alumnos;
+    }
+
+    /**
+     * @param alumnos the alumnos to set
+     */
+    public void setAlumnos(List<Alumnos> alumnos) {
+        this.alumnos = alumnos;
+    }
+
+
+    
 }
