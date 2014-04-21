@@ -3,6 +3,7 @@
     Created on : 20-abr-2014, 16:44:52
     Author     : eric
 --%>
+<%@page import="com.ipn.modelo.Beans.Preguntas"%>
 <%--
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -243,19 +244,22 @@
                             <div class="row">
                                 <div class="col-lg-6">
                                     <form action="ServletWAD?accion=finalizado" method="POST">
-                                        
-                                        
+                                        <%
+                                            List<Preguntas> preguntas = request.getParameter("preguntas");
+                                            for(Preguntas p: preguntas)
+                                                {
+                                                    String PREG=p.getPregunta();
+                                                    char c=p.getRespuesta().getRespuesta();
+                                        %>
                                         <div class="form-group">
-                                            <label>Selects</label>
+                                            <label><%=PREG%></label>
                                             <select class="form-control">
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                                <option>5</option>
+                                                <option><%=c%></option>
+                                                <option>B</option>
+                                                <option>C</option>
                                             </select>
                                         </div>
-                                        
+                                        <% }  %>
                                         <button type="submit" class="btn btn-default">Submit Button</button>
                                         <button type="reset" class="btn btn-default">Reset Button</button>
                                     </form>
