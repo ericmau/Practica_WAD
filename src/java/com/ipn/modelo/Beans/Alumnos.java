@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
@@ -22,6 +24,12 @@ import javax.persistence.Table;
 // Bean para los alumnos
 @Entity
 @Table(name="Alumnos")
+/*@NamedQueries({
+    @NamedQuery(name="Alumnos.findAll",
+                query="SELECT a FROM Alumnos a"),
+    @NamedQuery(name="Alumno.findMaterias",
+                query="SELECT a FROM Alumnos a WHERE a.idAlumnos = :alumno"),
+})*/
 public class Alumnos implements Serializable {
     // Atributos de la tabla Carrera
         @Id

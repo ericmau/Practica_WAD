@@ -3,6 +3,7 @@ package com.ipn.controlador;
 import com.ipn.Session.ManejadorSesiones;
 import com.ipn.modelo.Beans.Alumnos;
 import java.io.IOException;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.servlet.ServletException;
@@ -15,7 +16,18 @@ import javax.servlet.http.HttpServletResponse;
  * @author Diego
  */
 public class ServletWAD extends HttpServlet {
-    private Alumnos a=null;
+    private Alumnos a;
+    EntityManagerFactory emf;
+    EntityManager em;
+    ManejadorSesiones sesion;
+    
+    public void initServlet()
+    {
+        a=null;
+        emf=(EntityManagerFactory)getServletContext().getAttribute("emf");
+        em = emf.createEntityManager();
+        sesion = new ManejadorSesiones();
+    }
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -29,10 +41,8 @@ public class ServletWAD extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        ManejadorSesiones sesion = new ManejadorSesiones();
-        EntityManagerFactory emf=(EntityManagerFactory)getServletContext().getAttribute("emf");
-        EntityManager em = emf.createEntityManager();
         String accion=request.getParameter("accion");
+        initServlet();
         // Aqui va toda la logica del negocio, usaremos el atributo "accion" para ver que se tiene que hacer
         switch (accion) {
             case "Ingresar":
@@ -63,7 +73,14 @@ public class ServletWAD extends HttpServlet {
                 }
                 break;
             case "materias":
-                muestraMaterias(request,response);
+                if(sesion.isSession(request))
+                {
+                    muestraMaterias(request,response);
+                }
+                else
+                {
+                    muestraError(request, response);
+                }
                 break;
             case "contestar":
                 muestraPreguntas(request,response);
@@ -118,7 +135,25 @@ public class ServletWAD extends HttpServlet {
     }// </editor-fold>
 
     private void muestraMaterias(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        try{
+        System.out.println("LISTA MATERIAS");
+        // Preparar entidad
+        // Empezar transaccion
+        em.getTransaction().begin();
+        // Guardar entidad
+        a=em.find(Alumnos.class,sesion.returnID(request, response));
+        List materias=a.getMaterias();
+        //em.persist(c);
+        // Hacer un commit
+        em.getTransaction().commit();
+        // Cerrar coneccion
+        request.setAttribute("materias", materias);
         request.getRequestDispatcher("/listaMaterias.jsp").forward(request, response);
+        }finally{
+            if(em.getTransaction().isActive())
+            {   em.getTransaction().rollback();}
+            em.close();
+        }
     }
 
     private void muestraPreguntas(HttpServletRequest request, HttpServletResponse response) {

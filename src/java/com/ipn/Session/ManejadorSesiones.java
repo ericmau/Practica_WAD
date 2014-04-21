@@ -29,6 +29,13 @@ public class ManejadorSesiones {
         
     }
     
+     public int returnID(HttpServletRequest request,HttpServletResponse response)
+    {
+        HttpSession s=request.getSession(true);
+        return Integer.parseInt(s.getAttribute(ID).toString());
+        
+    }
+    
     public void createSession(HttpServletRequest request,HttpServletResponse response,
             Alumnos a)
     {

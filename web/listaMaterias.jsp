@@ -4,6 +4,8 @@
     Author     : eric
 --%>
 
+<%@page import="com.ipn.modelo.Beans.Materia"%>
+<%@page import="java.util.List"%>
 <%@page import="com.ipn.Session.ManejadorSesiones"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -74,7 +76,7 @@
                         <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Materias<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="flot.html">Lista de Materias</a>
+                                <a href="#">Lista de Materias</a>
                             </li>
                             <li>
                                 <a href="morris.html">Evaluar</a>
@@ -108,6 +110,24 @@
                 <!-- /.col-lg-12 -->
             </div>
                 <!-- /.row -->
+                
+                <hr><ol>
+            <%
+                @SuppressWarnings("unchecked")
+                List<Materia> listaDeMaterias = (List<Materia>)request.getAttribute("materias");
+                for(Materia lasMaterias: listaDeMaterias)
+                {
+            %>
+            <li>
+                <%=
+                        lasMaterias         
+                %>
+            </li>
+            <%
+                }
+            %>
+        </ol><hr/>
+                
             <div class="row">
                 <div class="col-lg-6">
                     <div class="panel panel-default">
