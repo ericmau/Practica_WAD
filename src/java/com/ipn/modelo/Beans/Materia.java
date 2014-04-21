@@ -31,6 +31,7 @@ public class Materia implements Serializable {
         private int idMateria;
         private String Nombre;
         private int Creditos;
+        private int Calificacion;
     
     // Lo siguiente es para crear la relacion "ManyToMany" con la tabla Alumnos
         @ManyToMany(fetch = FetchType.LAZY,mappedBy = "materias")
@@ -112,7 +113,21 @@ public class Materia implements Serializable {
 
     @Override
     public String toString() {
-        return "Materia{" + "idMateria=" + idMateria + ", Nombre=" + Nombre + ", Creditos=" + Creditos + '}';
+        return "Materia{" + "idMateria=" + getIdMateria() + ", Nombre=" + getNombre() + ", Creditos=" + getCreditos() + '}';
+    }
+
+    /**
+     * @return the Calificacion
+     */
+    public int getCalificacion() {
+        return Calificacion;
+    }
+
+    /**
+     * @param Calificacion the Calificacion to set
+     */
+    public void setCalificacion(int Calificacion) {
+        this.Calificacion = Calificacion;
     }
     
 }

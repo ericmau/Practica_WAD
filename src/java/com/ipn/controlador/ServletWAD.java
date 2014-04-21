@@ -2,6 +2,10 @@ package com.ipn.controlador;
 
 import com.ipn.Session.ManejadorSesiones;
 import com.ipn.modelo.Beans.Alumnos;
+import com.ipn.modelo.Beans.Evaluacion;
+import com.ipn.modelo.Beans.Materia;
+import com.ipn.modelo.Beans.Preguntas;
+import com.ipn.modelo.Beans.Respuestas;
 import java.io.IOException;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -82,8 +86,15 @@ public class ServletWAD extends HttpServlet {
                     muestraError(request, response);
                 }
                 break;
-            case "contestar":
-                muestraPreguntas(request,response);
+            case "evaluar":
+                if(sesion.isSession(request))
+                {
+                    muestraPreguntas(request,response);
+                }
+                else
+                {
+                    muestraError(request, response);
+                }
                 break;
             case "finalizado":
                 muestraRespuestas(request,response);
@@ -156,8 +167,29 @@ public class ServletWAD extends HttpServlet {
         }
     }
 
-    private void muestraPreguntas(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private void muestraPreguntas(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try{
+        System.out.println("MUESTRA CUESTIONARIO");
+        // Preparar entidad
+        // Empezar transaccion
+        em.getTransaction().begin();
+        // Guardar entidad
+        a=em.find(Alumnos.class,sesion.returnID(request, response));
+        Materia m=em.find(Materia.class,Integer.parseInt(request.getParameter("mat")));
+        List<Evaluacion> evaluacion=m.getEvaluacion();
+        Evaluacion e=evaluacion.get(0);
+        List<Preguntas> preguntas = e.getPreguntas();
+        // Hacer un commit
+        em.getTransaction().commit();
+        // Cerrar coneccion
+        request.setAttribute("mm", m.getNombre());
+        request.setAttribute("preguntas", preguntas);
+        request.getRequestDispatcher("/Cuestionario.jsp").forward(request, response);
+        }finally{
+            if(em.getTransaction().isActive())
+            {   em.getTransaction().rollback();}
+            em.close();
+        }
     }
 
     private void muestraRespuestas(HttpServletRequest request, HttpServletResponse response) {

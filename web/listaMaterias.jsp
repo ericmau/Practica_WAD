@@ -111,28 +111,12 @@
             </div>
                 <!-- /.row -->
                 
-                <hr><ol>
-            <%
-                @SuppressWarnings("unchecked")
-                List<Materia> listaDeMaterias = (List<Materia>)request.getAttribute("materias");
-                for(Materia lasMaterias: listaDeMaterias)
-                {
-            %>
-            <li>
-                <%=
-                        lasMaterias         
-                %>
-            </li>
-            <%
-                }
-            %>
-        </ol><hr/>
-                
+          
             <div class="row">
                 <div class="col-lg-6">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Striped Rows
+                            Materias
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -140,31 +124,31 @@
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
-                                            <th>#</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
-                                            <th>Username</th>
+                                            <th>ID</th>
+                                            <th>Nombre</th>
+                                            <th>Creditos</th>
+                                            <th>Calificacion</th>
+                                            <th>Evaluacion</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                             <%
+                                                List<Materia> listaDeMaterias = (List<Materia>)request.getAttribute("materias");
+                                                for(Materia lasMaterias: listaDeMaterias)
+                                                {
+                                                    String ID=""+lasMaterias.getIdMateria();
+                                                    String NOMBRE=lasMaterias.getNombre();
+                                                    String CREDITOS=""+lasMaterias.getCreditos();
+                                                    String CALIF=""+lasMaterias.getCalificacion();
+                                            %>
                                         <tr>
-                                            <td>1</td>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
+                                            <td><%=ID%></td>
+                                            <td><%=NOMBRE%></td>
+                                            <td><%=CREDITOS%></td>
+                                            <td><%=CALIF%></td>
+                                            <td><a href="ServletWAD?accion=evaluar&mat=<%=ID%>">Evaluar</a></td>
                                         </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Larry</td>
-                                            <td>the Bird</td>
-                                            <td>@twitter</td>
-                                        </tr>
+                                        <% }  %>
                                     </tbody>
                                 </table>
                             </div>
