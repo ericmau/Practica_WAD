@@ -148,7 +148,8 @@
                                         %>
                                         <div class="form-group">
                                             <label><%=PREG%></label>
-                                            <select name="seleccion<%=cont%>" id="seleccion" class="form-control">
+                                            <select name="seleccion<%=cont%>" id="seleccion<%=cont%>" class="form-control">
+                                                <option value="null"></option>
                                                 <option value="a"><%=R1%></option>
                                                 <option value="b"><%=R2%></option>
                                                 <option value="c"><%=R3%></option>

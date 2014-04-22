@@ -213,29 +213,44 @@ public class ServletWAD extends HttpServlet {
         String seleccion2=request.getParameter("seleccion2");
         String seleccion3=request.getParameter("seleccion3");
         Materia m=em.find(Materia.class,Integer.parseInt(request.getParameter("mat")));
-        correctas=0;
         List evaluacion=m.getEvaluacion();
         Evaluacion e=(Evaluacion) evaluacion.get(0);
         List<Preguntas> preguntas = e.getPreguntas();
-        System.out.println("ENTRO LOL");
-        for(Preguntas p: preguntas)
+        Respuestas r1=preguntas.get(0).getRespuesta();
+        Respuestas r2=preguntas.get(1).getRespuesta();
+        Respuestas r3=preguntas.get(2).getRespuesta();
+        if(seleccion1.equals(r1.getRCorrecta().toString()))
+            {
+                correctas++;
+            }
+        if(seleccion2.equals(r2.getRCorrecta().toString()))
+            {
+                correctas++;
+            }
+        if(seleccion3.equals(r3.getRCorrecta().toString()))
+            {
+                correctas++;
+            }
+
+        /*for(Preguntas p: preguntas)
         {
             Respuestas r=p.getRespuesta();
             if(seleccion1.equals(r.getRCorrecta().toString()))
             {
+                System.out.println("primera: "+r.getRCorrecta().toString());
                 correctas++;
-                continue;
             }
-            if(seleccion2.equals(r.getRCorrecta().toString()))
+            else if(seleccion2.equals(r.getRCorrecta().toString()))
             {
+                System.out.println("segunda: "+r.getRCorrecta().toString());
                 correctas++;
-                continue;
             }
-            if(seleccion3.equals(r.getRCorrecta().toString()))
+            else if(seleccion3.equals(r.getRCorrecta().toString()))
             {
+                System.out.println("tercera: "+r.getRCorrecta().toString());
                 correctas++;
             }
-        }
+        }*/
         // Hacer un commit
         em.getTransaction().commit();
         // Cerrar coneccion
