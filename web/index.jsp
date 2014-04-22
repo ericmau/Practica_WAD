@@ -6,6 +6,7 @@
 
 <%@page import="com.ipn.Session.ManejadorSesiones"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page errorPage="error.jsp?de=index.jsp" %>
 <!DOCTYPE html>
 <html>
 

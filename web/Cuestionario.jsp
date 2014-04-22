@@ -137,6 +137,7 @@
                                     <form action="ServletWAD?accion=finalizado" method="POST">
                                         <%
                                             List<Preguntas> preguntas=(List<Preguntas>)request.getAttribute("preguntas");
+                                            int cont=1;
                                             for(Preguntas p: preguntas)
                                                 {
                                                     String PREG=p.getPregunta();
@@ -146,13 +147,13 @@
                                         %>
                                         <div class="form-group">
                                             <label><%=PREG%></label>
-                                            <select class="form-control">
-                                                <option><%=R1%></option>
-                                                <option><%=R2%></option>
-                                                <option><%=R3%></option>
+                                            <select name="seleccion<%=cont%>" id="seleccion" class="form-control">
+                                                <option value="a"><%=R1%></option>
+                                                <option value="b"><%=R2%></option>
+                                                <option value="c"><%=R3%></option>
                                             </select>
                                         </div>
-                                        <% }  %>
+                                        <% cont++;}  %>
                                         <center>
                                         <button type="submit" class="btn btn-default">Finalizar</button>
                                         </center>

@@ -97,7 +97,14 @@ public class ServletWAD extends HttpServlet {
                 }
                 break;
             case "finalizado":
-                muestraRespuestas(request,response);
+                if(sesion.isSession(request))
+                {
+                    muestraRespuestas(request,response);
+                }
+                else
+                {
+                    muestraError(request, response);
+                }
                 break;
             default:
                 muestraError(request,response);
@@ -192,12 +199,53 @@ public class ServletWAD extends HttpServlet {
         }
     }
 
-    private void muestraRespuestas(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private void muestraRespuestas(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try{
+        System.out.println("MUESTRA RESPUESTAS");
+        // Preparar entidad
+        // Empezar transaccion
+        em.getTransaction().begin();
+        // Guardar entidad
+        a=em.find(Alumnos.class,sesion.returnID(request, response));
+        String seleccion1=request.getParameter("seleccion1");
+        String seleccion2=request.getParameter("seleccion2");
+        String seleccion3=request.getParameter("seleccion3");
+        int correctas=0;
+        Materia m=em.find(Materia.class,Integer.parseInt(request.getParameter("mat")));
+        List evaluacion=m.getEvaluacion();
+        Evaluacion e=(Evaluacion) evaluacion.get(0);
+        List<Preguntas> preguntas = e.getPreguntas();
+        for(Preguntas p: preguntas)
+        {
+            if(seleccion1.equals(p.getRespuesta().getRCorrecta().toString()))
+            {
+            
+            }
+            if(seleccion2.equals(p.getRespuesta().getRCorrecta().toString()))
+            {
+            
+            }
+            if(seleccion3.equals(p.getRespuesta().getRCorrecta().toString()))
+            {
+            
+            }
+        }
+        // Hacer un commit
+        em.getTransaction().commit();
+        // Cerrar coneccion
+        request.setAttribute("mm", m);
+        request.setAttribute("preguntas", preguntas);
+        request.getRequestDispatcher("/Cuestionario.jsp").forward(request, response);
+        }finally{
+            if(em.getTransaction().isActive())
+            {   em.getTransaction().rollback();}
+            em.close();
+        }
     }
 
-    private void muestraError(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private void muestraError(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("de", "SevletWAD");
+        request.getRequestDispatcher("/error.jsp").forward(request, response);
     }
 
     private void muestraIndex(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
