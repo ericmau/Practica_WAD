@@ -20,17 +20,19 @@ import javax.servlet.http.HttpServletResponse;
  * @author Diego
  */
 public class ServletWAD extends HttpServlet {
-    private Alumnos a;
-    EntityManagerFactory emf;
-    EntityManager em;
-    ManejadorSesiones sesion;
-    
+    private  Alumnos a;
+    private  EntityManagerFactory emf;
+    private  EntityManager em;
+    private  ManejadorSesiones sesion;
+    private  int correctas;
+
     public void initServlet()
     {
         a=null;
         emf=(EntityManagerFactory)getServletContext().getAttribute("emf");
         em = emf.createEntityManager();
         sesion = new ManejadorSesiones();
+        correctas=0;
     }
 
     /**
@@ -210,22 +212,26 @@ public class ServletWAD extends HttpServlet {
         String seleccion1=request.getParameter("seleccion1");
         String seleccion2=request.getParameter("seleccion2");
         String seleccion3=request.getParameter("seleccion3");
-        int correctas=0;
         Materia m=em.find(Materia.class,Integer.parseInt(request.getParameter("mat")));
+        correctas=0;
         List evaluacion=m.getEvaluacion();
         Evaluacion e=(Evaluacion) evaluacion.get(0);
         List<Preguntas> preguntas = e.getPreguntas();
+        System.out.println("ENTRO LOL");
         for(Preguntas p: preguntas)
         {
-            if(seleccion1.equals(p.getRespuesta().getRCorrecta().toString()))
+            Respuestas r=p.getRespuesta();
+            if(seleccion1.equals(r.getRCorrecta().toString()))
             {
                 correctas++;
+                continue;
             }
-            if(seleccion2.equals(p.getRespuesta().getRCorrecta().toString()))
+            if(seleccion2.equals(r.getRCorrecta().toString()))
             {
                 correctas++;
+                continue;
             }
-            if(seleccion3.equals(p.getRespuesta().getRCorrecta().toString()))
+            if(seleccion3.equals(r.getRCorrecta().toString()))
             {
                 correctas++;
             }

@@ -119,6 +119,7 @@
                     <%
                         Materia M=(Materia)request.getAttribute("mm");
                         String nombreMateria=M.getNombre();
+                        int idMat=M.getIdMateria();
                     %>
                     <h1 class="page-header">Cuestionario <%=nombreMateria%> </h1>
                 </div>
@@ -134,7 +135,7 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <form action="ServletWAD?accion=finalizado" method="POST">
+                                    <form action="ServletWAD?accion=finalizado&mat=<%=idMat%>" method="POST">
                                         <%
                                             List<Preguntas> preguntas=(List<Preguntas>)request.getAttribute("preguntas");
                                             int cont=1;

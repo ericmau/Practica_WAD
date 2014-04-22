@@ -111,10 +111,9 @@
                 <!-- /.col-lg-12 -->
             </div>
                 <!-- /.row -->
-        </div>
         <!--/.page-wrapper-->
             <div class="row">
-                <div class="col-lg-4">
+                <div class="col-lg-12">
                     <div class="panel panel-info">
                         <div class="panel-heading">
                             !Felicidades!
@@ -122,9 +121,11 @@
                         <%
                         Materia M=(Materia)request.getAttribute("mm");
                         String nombreMateria=M.getNombre();
+                        int correctas=Integer.parseInt(request.getAttribute("correctas").toString());
                         %>
                         <div class="panel-body">
                             <p>Ha concluido su evaluacion de la materia <%=nombreMateria%></p>
+                            <p>Ha tenido <%=correctas%> aciertos.</p>
                         </div>
                         <div class="panel-footer">
                             Evaluaciones Online
@@ -134,7 +135,7 @@
                 <!-- /.col-lg-4 -->
             </div>
             <!-- /.row -->
-            <button type="button" class="btn btn-primary btn-lg btn-block">Block level button</button>
+        </div>
     </div>
     <!-- /.wrapper -->
 
