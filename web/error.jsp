@@ -15,6 +15,7 @@
 </head>
 <body>
 <% String de = (String) request.getAttribute("de"); %>
+<% String deD = (String) request.getParameter("deD"); %>
 <p class="tituloError"> A ocurrido un Error <i class="error"> <%= de%> </i>
 La Excepcion fue = <i class="error"> <%= exception%> </i><br/>
 <% System.out.println(exception.toString()); %>

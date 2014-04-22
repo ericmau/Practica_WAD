@@ -5,6 +5,7 @@
 --%>
 
 <%@page import="com.ipn.Session.ManejadorSesiones"%>
+<%@page errorPage="error.jsp?deD=login.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
