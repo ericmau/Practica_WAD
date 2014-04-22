@@ -265,8 +265,7 @@ public class ServletWAD extends HttpServlet {
     }
 
     private void muestraError(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("de", "SevletWAD");
-        request.getRequestDispatcher("/error.jsp").forward(request, response);
+        response.sendRedirect("/error.jsp?de=ServletWAD");
     }
 
     private void muestraIndex(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

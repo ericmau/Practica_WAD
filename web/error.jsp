@@ -14,9 +14,8 @@
 <link href="css/estilos.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
-<% String de = (String) request.getAttribute("de"); %>
-<% String deD = (String) request.getParameter("deD"); %>
-<p class="tituloError"> A ocurrido un Error <i class="error"> <%= de%> </i>
+<% String de = (String) request.getParameter("de"); %>
+<p class="tituloError"> A ocurrido un Error <i class="error"> <%=de%> </i>
 La Excepcion fue = <i class="error"> <%= exception%> </i><br/>
 <% System.out.println(exception.toString()); %>
 </p>
