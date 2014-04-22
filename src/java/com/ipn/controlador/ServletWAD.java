@@ -219,23 +219,23 @@ public class ServletWAD extends HttpServlet {
         {
             if(seleccion1.equals(p.getRespuesta().getRCorrecta().toString()))
             {
-            
+                correctas++;
             }
             if(seleccion2.equals(p.getRespuesta().getRCorrecta().toString()))
             {
-            
+                correctas++;
             }
             if(seleccion3.equals(p.getRespuesta().getRCorrecta().toString()))
             {
-            
+                correctas++;
             }
         }
         // Hacer un commit
         em.getTransaction().commit();
         // Cerrar coneccion
         request.setAttribute("mm", m);
-        request.setAttribute("preguntas", preguntas);
-        request.getRequestDispatcher("/Cuestionario.jsp").forward(request, response);
+        request.setAttribute("correctas", correctas);
+        request.getRequestDispatcher("/resultados.jsp").forward(request, response);
         }finally{
             if(em.getTransaction().isActive())
             {   em.getTransaction().rollback();}
