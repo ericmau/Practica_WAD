@@ -176,9 +176,9 @@ public class ServletWAD extends HttpServlet {
         // Guardar entidad
         a=em.find(Alumnos.class,sesion.returnID(request, response));
         Materia m=em.find(Materia.class,Integer.parseInt(request.getParameter("mat")));
-        List<Evaluacion> evaluacion=m.getEvaluacion();
-        Evaluacion e=evaluacion.get(0);
-        List<Preguntas> preguntas = e.getPreguntas();
+        List evaluacion=m.getEvaluacion();
+        Evaluacion e=(Evaluacion) evaluacion.get(0);
+        List preguntas = e.getPreguntas();
         // Hacer un commit
         em.getTransaction().commit();
         // Cerrar coneccion
