@@ -24,7 +24,10 @@ public class Respuestas implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idRespuestas;
-    private Character Respuesta;
+    private String RespuestaA;
+    private String RespuestaB;
+    private String RespuestaC;
+    private Character RCorrecta;
     
     // Relacion con la tabla Preguntas ""OneToOne
      @OneToOne(optional=false, mappedBy="respuesta")
@@ -32,7 +35,7 @@ public class Respuestas implements Serializable{
 
     @Override
     public String toString() {
-        return "Respuestas{" + "idRespuestas=" + getIdRespuestas() + ", Respuesta=" + getRespuesta() + '}';
+        return "Respuestas{" + "idRespuestas=" + idRespuestas + ", RespuestaA=" + RespuestaA + ", RespuestaB=" + RespuestaB + ", RespuestaC=" + RespuestaC + ", RCorrecta=" + RCorrecta + ", pregunta=" + pregunta + '}';
     }
 
     /**
@@ -50,17 +53,59 @@ public class Respuestas implements Serializable{
     }
 
     /**
-     * @return the Respuesta
+     * @return the RespuestaA
      */
-    public Character getRespuesta() {
-        return Respuesta;
+    public String getRespuestaA() {
+        return RespuestaA;
     }
 
     /**
-     * @param Respuesta the Respuesta to set
+     * @param RespuestaA the RespuestaA to set
      */
-    public void setRespuesta(Character Respuesta) {
-        this.Respuesta = Respuesta;
+    public void setRespuestaA(String RespuestaA) {
+        this.RespuestaA = RespuestaA;
+    }
+
+    /**
+     * @return the RespuestaB
+     */
+    public String getRespuestaB() {
+        return RespuestaB;
+    }
+
+    /**
+     * @param RespuestaB the RespuestaB to set
+     */
+    public void setRespuestaB(String RespuestaB) {
+        this.RespuestaB = RespuestaB;
+    }
+
+    /**
+     * @return the RespuestaC
+     */
+    public String getRespuestaC() {
+        return RespuestaC;
+    }
+
+    /**
+     * @param RespuestaC the RespuestaC to set
+     */
+    public void setRespuestaC(String RespuestaC) {
+        this.RespuestaC = RespuestaC;
+    }
+
+    /**
+     * @return the RCorrecta
+     */
+    public Character getRCorrecta() {
+        return RCorrecta;
+    }
+
+    /**
+     * @param RCorrecta the RCorrecta to set
+     */
+    public void setRCorrecta(Character RCorrecta) {
+        this.RCorrecta = RCorrecta;
     }
 
     /**
@@ -77,6 +122,5 @@ public class Respuestas implements Serializable{
         this.pregunta = pregunta;
     }
 
-    
-    
+
 }

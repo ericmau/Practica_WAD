@@ -78,7 +78,7 @@
                         <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Materias<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="ServletWAd?accion=materias">Lista de Materias</a>
+                                <a href="ServletWAD?accion=materias">Lista de Materias</a>
                             </li>
                             <li>
                                 <a href="morris.html">Evaluar</a>
@@ -113,11 +113,12 @@
             </div>
                 <!-- /.row -->
                 
-            <div id="page-wrapper">
+            <!--<div id="page-wrapper">-->
             <div class="row">
                 <div class="col-lg-12">
                     <%
-                        String nombreMateria=request.getParameter("mm");
+                        Materia M=(Materia)request.getAttribute("mm");
+                        String nombreMateria=M.getNombre();
                     %>
                     <h1 class="page-header">Cuestionario <%=nombreMateria%> </h1>
                 </div>
@@ -139,18 +140,22 @@
                                             for(Preguntas p: preguntas)
                                                 {
                                                     String PREG=p.getPregunta();
-                                                    char c=p.getRespuesta().getRespuesta();
+                                                    String R1=p.getRespuesta().getRespuestaA();
+                                                    String R2=p.getRespuesta().getRespuestaB();
+                                                    String R3=p.getRespuesta().getRespuestaC();
                                         %>
                                         <div class="form-group">
                                             <label><%=PREG%></label>
                                             <select class="form-control">
-                                                <option><%=c%></option>
-                                                <option>B</option>
-                                                <option>C</option>
+                                                <option><%=R1%></option>
+                                                <option><%=R2%></option>
+                                                <option><%=R3%></option>
                                             </select>
                                         </div>
                                         <% }  %>
+                                        <center>
                                         <button type="submit" class="btn btn-default">Finalizar</button>
+                                        </center>
                                     </form>
                                 </div>
                                 
@@ -164,7 +169,7 @@
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
-        </div>
+        <!--</div>-->
         <!-- /#page-wrapper -->
             
                

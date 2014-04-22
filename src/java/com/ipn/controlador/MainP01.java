@@ -169,6 +169,12 @@ public class MainP01 {
         // Preparar entidad
         Alumnos a=em.find(Alumnos.class, 1);
             System.out.println(a.getNombre()+" "+a.getPaterno());
+        // Guardar entidad
+        List<Materia> materias=a.getMaterias();
+        System.out.println(materias.get(1).toString());
+        Materia m=em.find(Materia.class,1);
+            System.out.println(m.toString());
+        //em.persist(c);
         // Hacer un commit
         em.getTransaction().commit();
         // Cerrar coneccion

@@ -182,7 +182,7 @@ public class ServletWAD extends HttpServlet {
         // Hacer un commit
         em.getTransaction().commit();
         // Cerrar coneccion
-        request.setAttribute("mm", m.getNombre());
+        request.setAttribute("mm", m);
         request.setAttribute("preguntas", preguntas);
         request.getRequestDispatcher("/Cuestionario.jsp").forward(request, response);
         }finally{
