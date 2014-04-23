@@ -231,26 +231,10 @@ public class ServletWAD extends HttpServlet {
             {
                 correctas++;
             }
-
-        /*for(Preguntas p: preguntas)
-        {
-            Respuestas r=p.getRespuesta();
-            if(seleccion1.equals(r.getRCorrecta().toString()))
-            {
-                System.out.println("primera: "+r.getRCorrecta().toString());
-                correctas++;
-            }
-            else if(seleccion2.equals(r.getRCorrecta().toString()))
-            {
-                System.out.println("segunda: "+r.getRCorrecta().toString());
-                correctas++;
-            }
-            else if(seleccion3.equals(r.getRCorrecta().toString()))
-            {
-                System.out.println("tercera: "+r.getRCorrecta().toString());
-                correctas++;
-            }
-        }*/
+        if(correctas==3){m.setCalificacion(10);}
+        if(correctas==2){m.setCalificacion(8);}
+        if(correctas==1){m.setCalificacion(4);}
+        if(correctas==0){m.setCalificacion(0);}
         // Hacer un commit
         em.getTransaction().commit();
         // Cerrar coneccion
