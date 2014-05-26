@@ -253,6 +253,10 @@ public class ServletWAD extends HttpServlet {
     }
 
     private void muestraIndex(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if(request.getParameter("nombre").equals("admin") && request.getParameter("password").equals("admin"))
+        {
+            request.getRequestDispatcher("/indexadmin.jsp").forward(request, response);
+        }
         request.getRequestDispatcher("/index.jsp").forward(request, response);
     }
 
